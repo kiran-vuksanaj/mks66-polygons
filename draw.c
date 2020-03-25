@@ -46,9 +46,20 @@ void draw_polygons( struct matrix *points, screen s, color c ) {
 	printf("Need at least three points to draw a polygon!\n");
 	return;
   }
+  /* print_matrix(points); */
 
   int point;
   for( point = 0; point < points->lastcol-1; point+=3 ){
+	/*
+	printf("(%lf,%lf) -> (%lf, %lf) -> (%lf, %lf) -<|\n",
+		   points->m[0][point],
+		   points->m[1][point],
+		   points->m[0][point+1],
+		   points->m[1][point+1],
+		   points->m[0][point+2],
+		   points->m[1][point+2]
+		   );
+	*/
 	draw_line(
 			  points->m[0][point],
 			  points->m[1][point],
@@ -83,7 +94,7 @@ void draw_polygons( struct matrix *points, screen s, color c ) {
   upper-left-front corner is (x, y, z) with width,
   height and depth dimensions.
   ====================*/
-void add_box( struct matrix * edges,
+void add_box( struct matrix * polygons,
               double x, double y, double z,
               double width, double height, double depth ) {
   double x0, y0, z0, x1, y1, z1;
@@ -94,6 +105,18 @@ void add_box( struct matrix * edges,
   z0 = z;
   z1 = z-depth;
 
+  /* POLYGON VERSION */
+  // front
+  add_polygon(polygons,
+			  x0, y0, z0,
+			  x0, y1, z0,
+			  x1, y0, z0);
+  add_polygon(polygons,
+			  x0, y1, z0,
+			  x1, y1, z0,
+			  x1, y0, z0);
+  /* EDGE VERSION */
+  /*
   //front
   add_edge(edges, x0, y0, z0, x1, y0, z0);
   add_edge(edges, x1, y0, z0, x1, y1, z0);
@@ -111,6 +134,7 @@ void add_box( struct matrix * edges,
   add_edge(edges, x1, y0, z0, x1, y0, z1);
   add_edge(edges, x1, y1, z0, x1, y1, z1);
   add_edge(edges, x0, y1, z0, x0, y1, z1);
+  */
 }
 
 
