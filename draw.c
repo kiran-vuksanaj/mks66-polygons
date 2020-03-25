@@ -205,11 +205,34 @@ void add_box( struct matrix * polygons,
 
   should call generate_sphere to create the necessary points
   ====================*/
-void add_sphere( struct matrix * edges,
+void add_sphere( struct matrix * polygons,
                  double cx, double cy, double cz,
                  double r, int steps ) {
 
   struct matrix *points = generate_sphere(cx, cy, cz, r, steps);
+  /* POLYGON VERSION */
+  int slice;
+  int n = steps+1;
+  for( slice = 0; slice < (steps-1)*n; slice+=n ){
+	int p;
+	for( p = slice; p < slice+steps ; p++ ){
+	  if( p != slice+steps-1 ){
+		add_polygon(polygons,
+					points->m[0][  p  ],points->m[1][  p  ],points->m[2][  p  ],
+					points->m[0][ p+1 ],points->m[1][ p+1 ],points->m[2][ p+1 ],
+					points->m[0][p+1+n],points->m[1][p+1+n],points->m[2][p+1+n]);
+	  }
+	  if( p != slice ){
+		add_polygon(polygons,
+					points->m[0][  p  ],points->m[1][  p  ],points->m[2][  p  ],
+					points->m[0][p+1+n],points->m[1][p+1+n],points->m[2][p+1+n],
+					points->m[0][ p+n ],points->m[1][ p+n ],points->m[2][ p+n ]);
+	  }
+	}
+  }
+
+  /* EDGE VERSION */
+  /*
   int index, lat, longt;
   int latStop, longStop, latStart, longStart;
   latStart = 0;
@@ -230,6 +253,7 @@ void add_sphere( struct matrix * edges,
                 points->m[2][index] + 1);
     }
   }
+  */
   free_matrix(points);
 }
 
