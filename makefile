@@ -4,8 +4,8 @@ LDFLAGS= -lm
 CC= gcc
 
 run: all
-	./main script
-
+	./main alt_script
+#MAKE SURE TO COME BACK AND CHANGE THIS!
 all: $(OBJECTS)
 	$(CC) -o main $(OBJECTS) $(LDFLAGS)
 
