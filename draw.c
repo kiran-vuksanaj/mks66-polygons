@@ -78,6 +78,7 @@ void draw_polygons( struct matrix *points, screen s, color c ) {
 			  points->m[0][point],
 			  points->m[1][point],
 			  s,c);
+	
   }
 }
 
@@ -115,6 +116,56 @@ void add_box( struct matrix * polygons,
 			  x0, y1, z0,
 			  x1, y1, z0,
 			  x1, y0, z0);
+
+  // back
+  add_polygon(polygons,
+			  x0, y0, z1,
+			  x0, y1, z1,
+			  x1, y0, z1);
+  add_polygon(polygons,
+			  x0, y1, z1,
+			  x1, y1, z1,
+			  x1, y0, z1);
+
+  // top
+  add_polygon(polygons,
+			  x0, y0, z0,
+			  x1, y0, z1,
+			  x0, y0, z1);
+  add_polygon(polygons,
+			  x0, y0, z0,
+			  x1, y0, z0,
+			  x1, y0, z1);
+
+  // bottom
+  add_polygon(polygons,
+			  x0, y1, z0,
+			  x1, y1, z1,
+			  x0, y1, z1);
+  add_polygon(polygons,
+			  x0, y1, z0,
+			  x1, y1, z0,
+			  x1, y1, z1);
+
+  // left
+  add_polygon(polygons,
+			  x0, y0, z0,
+			  x0, y0, z1,
+			  x0, y1, z0);
+  add_polygon(polygons,
+			  x0, y0, z1,
+			  x0, y1, z1,
+			  x0, y1, z0);
+
+  // right
+  add_polygon(polygons,
+			  x1, y0, z0,
+			  x1, y0, z1,
+			  x1, y1, z0);
+  add_polygon(polygons,
+			  x1, y0, z1,
+			  x1, y1, z1,
+			  x1, y1, z0);
   /* EDGE VERSION */
   /*
   //front

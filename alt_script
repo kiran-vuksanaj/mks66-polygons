@@ -1,3 +1,13 @@
 box
-100 400 0 200 300 200
+0 0 0 100 100 100
+ident
+rotate
+x 30
+rotate
+y 30
+rotate
+z 30
+move
+250 250 0
+apply
 display
