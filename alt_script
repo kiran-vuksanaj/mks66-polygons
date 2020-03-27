@@ -16,7 +16,7 @@ sphere
 0 0 0 225
 ident
 rotate
-x 40
+x 85
 move
 250 250 0
 apply
