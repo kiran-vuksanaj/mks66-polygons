@@ -5,7 +5,6 @@ CC= gcc
 
 run: all
 	./main script
-#MAKE SURE TO COME BACK AND CHANGE THIS!
 all: $(OBJECTS)
 	$(CC) -o main $(OBJECTS) $(LDFLAGS)
 
@@ -29,3 +28,6 @@ gmath.o: gmath.c gmath.h
 
 clean:
 	rm *.o *~
+
+script: genscript.c
+	$(CC) -o genscript genscript.c

@@ -4,6 +4,7 @@
 
 # binary executable
 main
+genscript
 
 # image files
 *.png

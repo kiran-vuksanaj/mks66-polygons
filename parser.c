@@ -246,7 +246,7 @@ void parse_file ( char * filename,
       *strchr(line, '\n') = 0;
       //printf("name: %s\n", line);
       clear_screen(s);
-      draw_lines(edges, s, c);
+      draw_polygons(edges, s, c);
       save_extension(s, line);
     }//end save
   }
