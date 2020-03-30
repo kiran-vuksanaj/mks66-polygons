@@ -6,7 +6,7 @@
 #include "draw.h"
 #include "matrix.h"
 #include "math.h"
-
+#include "gmath.h"
 
 /*======== void add_polygon() ==========
   Inputs:   struct matrix *polygons
@@ -47,7 +47,10 @@ void draw_polygons( struct matrix *points, screen s, color c ) {
 	return;
   }
   /* print_matrix(points); */
-
+  double view[3];
+  view[0] = 0;
+  view[1] = 0;
+  view[2] = 1;
   int point;
   for( point = 0; point < points->lastcol-1; point+=3 ){
 	/*
@@ -60,25 +63,28 @@ void draw_polygons( struct matrix *points, screen s, color c ) {
 		   points->m[1][point+2]
 		   );
 	*/
-	draw_line(
-			  points->m[0][point],
-			  points->m[1][point],
-			  points->m[0][point+1],
-			  points->m[1][point+1],
-			  s,c);
-	draw_line(
-			  points->m[0][point+1],
-			  points->m[1][point+1],
-			  points->m[0][point+2],
-			  points->m[1][point+2],
-			  s,c);
-	draw_line(
-			  points->m[0][point+2],
-			  points->m[1][point+2],
-			  points->m[0][point],
-			  points->m[1][point],
-			  s,c);
-	
+	if( dot_product(
+					calculate_normal(points,point),
+					view) > 0 ){
+	  draw_line(
+				points->m[0][point],
+				points->m[1][point],
+				points->m[0][point+1],
+				points->m[1][point+1],
+				s,c);
+	  draw_line(
+				points->m[0][point+1],
+				points->m[1][point+1],
+				points->m[0][point+2],
+				points->m[1][point+2],
+				s,c);
+	  draw_line(
+				points->m[0][point+2],
+				points->m[1][point+2],
+				points->m[0][point],
+				points->m[1][point],
+				s,c);
+	}
   }
 }
 
